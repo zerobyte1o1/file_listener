@@ -10,7 +10,7 @@ class FileEventHandler(FileSystemEventHandler):
             print(f"File modified: {event.src_path}")
 
     def on_moved(self, event):
-        if not event.is_directory:
+        if not event.is_directory and event.dest_path == r"c:\dish.listen":
             # 文件被移动或重命名时触发，相当于文件被替换
             print(f"File replaced: {event.src_path}")
 
@@ -21,7 +21,7 @@ if __name__ == "__main__":
     observer = Observer()
     event_handler = FileEventHandler()
     # 设置监听目录
-    dis_dir = "/Users/liufangjing/Downloads/mit2meter.json"
+    dis_dir = "c:/dish.listen"
     observer.schedule(event_handler, dis_dir, True)
     observer.start()
     try:
