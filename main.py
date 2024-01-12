@@ -5,7 +5,7 @@ from watchdog.events import FileSystemEventHandler
 
 class MyHandler(FileSystemEventHandler):
     def on_modified(self, event):
-        if not event.is_directory and event.src_path == r"c:\dish.listen":
+        if event.is_directory:
             # 文件被修改时触发
             print(f"File modified: {event.src_path}")
 
