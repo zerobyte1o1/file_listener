@@ -4,11 +4,10 @@ from watchdog.events import FileSystemEventHandler
 
 
 class FileEventHandler(FileSystemEventHandler):
-    def on_modified(self, event):
+    def on_moved(self, event):
         if event.is_directory:
             print("directory modified:{0}".format(event.src_path))
-        else:
-            print("file modified:{0}".format(event.src_path))
+
 
 
 if __name__ == "__main__":
@@ -16,13 +15,13 @@ if __name__ == "__main__":
     observer = Observer()
     event_handler = FileEventHandler()
     # 设置监听目录
-    dis_dir = "c:/dish.listen"
+    dis_dir = "/Users/liufangjing/Downloads/mit2meter.json"
     observer.schedule(event_handler, dis_dir, True)
     observer.start()
     try:
         while True:
             # 设置监听频率(间隔周期时间)
-            time.sleep(10)
+            time.sleep(1)
     except KeyboardInterrupt:
-        observer.stop()
+        pass
     observer.join()
