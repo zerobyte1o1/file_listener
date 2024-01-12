@@ -4,9 +4,15 @@ from watchdog.events import FileSystemEventHandler
 
 
 class FileEventHandler(FileSystemEventHandler):
+    def on_modified(self, event):
+        if not event.is_directory:
+            # 文件被修改时触发
+            print(f"File modified: {event.src_path}")
+
     def on_moved(self, event):
-        if event.is_directory:
-            print("directory modified:{0}".format(event.src_path))
+        if not event.is_directory:
+            # 文件被移动或重命名时触发，相当于文件被替换
+            print(f"File replaced: {event.src_path}")
 
 
 
