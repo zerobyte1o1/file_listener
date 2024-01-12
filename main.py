@@ -3,25 +3,26 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 
-class MyHandler(FileSystemEventHandler):
+class FileEventHandler(FileSystemEventHandler):
     def on_modified(self, event):
         if event.is_directory:
-            # 文件被修改时触发
-            print(f"File modified: {event.src_path}")
+            print("directory modified:{0}".format(event.src_path))
+        else:
+            print("file modified:{0}".format(event.src_path))
 
 
 if __name__ == "__main__":
-    path = r"c:\dish.listen"  # 监听的文件路径
-
-    event_handler = MyHandler()
+    # 实例化Observer对象
     observer = Observer()
-    observer.schedule(event_handler, path, recursive=False)
+    event_handler = FileEventHandler()
+    # 设置监听目录
+    dis_dir = "c:/dish.listen"
+    observer.schedule(event_handler, dis_dir, True)
     observer.start()
-
     try:
         while True:
-            time.sleep(1)
+            # 设置监听频率(间隔周期时间)
+            time.sleep(10)
     except KeyboardInterrupt:
         observer.stop()
-
     observer.join()
