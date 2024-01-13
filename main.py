@@ -4,7 +4,7 @@ import shutil
 import subprocess
 
 file_path = 'c:/dish.listen'
-auto_folder_path = 'c:/winuitest-AIDish'
+auto_folder_path = 'c:\\winuitest-AIDish'
 port = 8765
 try:
     last_modified = os.path.getmtime(file_path)
@@ -32,7 +32,7 @@ while True:
                 except subprocess.CalledProcessError:
                     print(f'Port {port} is not in use')
 
-                os.system(f'del /f /a /s /q “{auto_folder_path}')
+                os.system(f'rd /s /q {auto_folder_path}')
                 print(f'Folder {auto_folder_path} deleted')
 
 
