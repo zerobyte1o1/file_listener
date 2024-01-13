@@ -21,7 +21,9 @@ while True:
             last_modified = current_modified
             if os.path.exists(auto_folder_path):
                 try:
-                    subprocess.check_output(f'netstat -ano | findstr :{port}', shell=True)
+                    # Get the process ID using the port
+                    netstat_output = subprocess.check_output(f'netstat -ano | findstr :{port}', shell=True)
+                    pid = netstat_output.decode().split()[-1]
                     print(f'Port {port} is in use')
                     # Forcefully terminate the process using the port
                     subprocess.check_output(f'taskkill /F /PID {pid}', shell=True)
