@@ -1,6 +1,5 @@
 import os
 import time
-import shutil
 import subprocess
 
 file_path = 'c:/dish.listen'
@@ -32,14 +31,22 @@ while True:
                 except subprocess.CalledProcessError:
                     print(f'Port {port} is not in use')
 
-                os.system(f'rd /s /q {auto_folder_path}')
-                print(f'Folder {auto_folder_path} deleted')
-
-
-
+                try:
+                    os.system(f'rd /s /q {auto_folder_path}')
+                    print(f'Folder {auto_folder_path} deleted')
+                except Exception as e:
+                    
+                    print(f'Error occurred while deleting folder: {e}')
+                    break
+                try:
+                    os.system('cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat')
+                except Exception as e:
+                    print(f'Error occurred while cloning repository: {e}')
+                    break
+                
             else:
                 print(f'Folder {auto_folder_path} does not exist')     
     except Exception as e:
         print(f'Error occurred: {e}')
 
-    time.sleep(3)
+    time.sleep(5)
