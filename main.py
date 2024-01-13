@@ -4,8 +4,8 @@ import shutil
 import subprocess
 
 file_path = 'c:/dish.listen'
-auto_folder_path = 'c:/winuiauto_AIDish'
-port = 8743
+auto_folder_path = 'c:/winuitest-AIDish'
+port = 8765
 try:
     last_modified = os.path.getmtime(file_path)
 
@@ -29,10 +29,16 @@ while True:
                     subprocess.check_output(f'taskkill /F /PID {pid}', shell=True)
                     print(f'Process using port {port} terminated')
                     # Delete the folder
-                    shutil.rmtree(auto_folder_path)
-                    print(f'Folder {auto_folder_path} deleted')
                 except subprocess.CalledProcessError:
                     print(f'Port {port} is not in use')
+
+                shutil.rmtree(auto_folder_path)
+                print(f'Folder {auto_folder_path} deleted')
+                Error
+                occurred: [WinError 5]
+                拒绝访问。: 'c:/winuitest-AIDish\\.git\\objects\\pack\\pack-a9ea86a55099f1a43c8bc00c1a489fbad9c44183.idx'
+
+
             else:
                 print(f'Folder {auto_folder_path} does not exist')     
     except Exception as e:
