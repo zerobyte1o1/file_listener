@@ -5,6 +5,7 @@ import subprocess
 file_path = 'c:/dish.listen'
 auto_folder_path = 'c:\\winuitest-AIDish'
 port = 8765
+last_modified = None
 try:
     last_modified = os.path.getmtime(file_path)
 
@@ -15,6 +16,8 @@ while True:
     try:
         current_modified = os.path.getmtime(file_path)
         print(current_modified)
+        if last_modified is None:
+            break
         if current_modified > last_modified:
             print('文件被修改')
             last_modified = current_modified
@@ -41,7 +44,8 @@ while True:
                 print(f'Folder {auto_folder_path} does not exist')
             try:
                 print("拉取代码")
-                subprocess.Popen('cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"')
+                subprocess.Popen(
+                    'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"')
             except Exception as e:
                 print(f'Error occurred while cloning repository: {e}')
 
