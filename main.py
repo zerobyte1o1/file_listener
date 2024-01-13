@@ -10,7 +10,7 @@ try:
 
 except Exception as e:
     print(f'Error occurred: {e}')
-    
+
 while True:
     try:
         current_modified = os.path.getmtime(file_path)
@@ -35,17 +35,16 @@ while True:
                     os.system(f'rd /s /q {auto_folder_path}')
                     print(f'Folder {auto_folder_path} deleted')
                 except Exception as e:
-                    
                     print(f'Error occurred while deleting folder: {e}')
-                    break
-                try:
-                    os.system('cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat')
-                except Exception as e:
-                    print(f'Error occurred while cloning repository: {e}')
-                    break
-                
+
             else:
-                print(f'Folder {auto_folder_path} does not exist')     
+                print(f'Folder {auto_folder_path} does not exist')
+            try:
+                os.system(
+                    'cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat')
+            except Exception as e:
+                print(f'Error occurred while cloning repository: {e}')
+
     except Exception as e:
         print(f'Error occurred: {e}')
 
