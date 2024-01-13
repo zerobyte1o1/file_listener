@@ -32,11 +32,9 @@ while True:
                 except subprocess.CalledProcessError:
                     print(f'Port {port} is not in use')
 
-                shutil.rmtree(auto_folder_path)
+                os.system(f'del /f /a /s /q “{auto_folder_path}')
                 print(f'Folder {auto_folder_path} deleted')
-                Error
-                occurred: [WinError 5]
-                拒绝访问。: 'c:/winuitest-AIDish\\.git\\objects\\pack\\pack-a9ea86a55099f1a43c8bc00c1a489fbad9c44183.idx'
+
 
 
             else:
