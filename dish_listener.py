@@ -18,7 +18,7 @@ while True:
     except Exception as e:
         print(f'Error occurred: {e}')
         continue
-    print(current_modified)
+    print(time.time())
     if last_modified is None:
         break
     if current_modified > last_modified:
