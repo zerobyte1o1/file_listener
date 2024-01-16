@@ -36,14 +36,14 @@ while True:
                 # Delete the folder
             except subprocess.CalledProcessError:
                 print(f'Port {port} is not in use')
-                continue
+            
 
             try:
                 os.system(f'rd /s /q {auto_folder_path}')
                 print(f'Folder {auto_folder_path} deleted')
             except Exception as e:
                 print(f'Error occurred while deleting folder: {e}')
-                continue
+
 
         else:
             print(f'Folder {auto_folder_path} does not exist')
@@ -54,7 +54,4 @@ while True:
         except Exception as e:
             print(f'Error occurred while cloning repository: {e}')
             continue
-
-
-
     time.sleep(5)
