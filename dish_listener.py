@@ -44,18 +44,8 @@ while True:
                 print(f'Folder {auto_folder_path} does not exist')
             try:
                 print("拉取代码")
-                import asyncio
-                async def clone_repository():
-                    process = await asyncio.create_subprocess_shell(
-                        'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"',
-                        stdout=asyncio.subprocess.PIPE,
-                        stderr=asyncio.subprocess.PIPE
-                    )
-                    stdout, stderr = await process.communicate()
-                    if process.returncode != 0:
-                        print(f'Error occurred while cloning repository: {stderr.decode()}')
-
-                asyncio.run(clone_repository())
+                subprocess.Popen(
+                    'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"')
             except Exception as e:
                 print(f'Error occurred while cloning repository: {e}')
 
