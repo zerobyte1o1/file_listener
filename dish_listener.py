@@ -5,22 +5,20 @@ import subprocess
 file_path = 'c:/dish.listen'
 auto_folder_path = 'c:\\winuitest-AIDish'
 port = 8765
-last_modified = None
-try:
-    last_modified = os.path.getmtime(file_path)
 
-except Exception as e:
-    print(f'Error occurred: {e}')
+if os.path.exists(file_path):
+    last_modified = os.path.getmtime(file_path)
+else:
+    last_modified = None
 
 while True:
-    try:
-        current_modified = os.path.getmtime(file_path)  
-    except Exception as e:
-        print(f'Error occurred: {e}')
-        continue
+    if os.path.exists(file_path):
+        current_modified = os.path.getmtime(file_path)
+    else:
+        current_modified = None
     print(time.time())
-    if last_modified is None:
-        break
+    if current_modified is None:
+        continue
     if current_modified > last_modified:
         print('文件被修改')
         last_modified = current_modified
