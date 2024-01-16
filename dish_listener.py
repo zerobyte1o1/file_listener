@@ -1,24 +1,25 @@
 import os
 import time
 import subprocess
+import schedule
 
 file_path = 'c:/dish.listen'
 auto_folder_path = 'c:\\winuitest-AIDish'
 port = 8765
 
-if os.path.exists(file_path):
-    last_modified = os.path.getmtime(file_path)
-else:
-    last_modified = None
-
-while True:
+def check_file():
+    if os.path.exists(file_path):
+        last_modified = os.path.getmtime(file_path)
+    else:
+        last_modified = None
+    
     if os.path.exists(file_path):
         current_modified = os.path.getmtime(file_path)
     else:
         current_modified = None
     print(time.time())
     if current_modified is None:
-        continue
+        return
     if current_modified > last_modified:
         print('文件被修改')
         last_modified = current_modified
@@ -51,5 +52,9 @@ while True:
                 'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"',shell=True)
         except Exception as e:
             print(f'Error occurred while cloning repository: {e}')
-            continue
-    time.sleep(5)
+
+schedule.every(5).seconds.do(check_file)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
