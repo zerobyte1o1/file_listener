@@ -45,7 +45,7 @@ while True:
             try:
                 print("拉取代码")
                 subprocess.Popen(
-                    'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"')
+                    'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"',timeout=5)
             except Exception as e:
                 print(f'Error occurred while cloning repository: {e}')
 
