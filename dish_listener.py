@@ -18,15 +18,13 @@ def check_file():
             try:
                 # Get the process ID using the port
                 netstat_process = subprocess.Popen(f'netstat -ano | findstr :{port}', shell=True, stdout=subprocess.PIPE)
-                netstat_output = netstat_process.communicate()[0]
-                pid = netstat_output.decode().split()[-1]
+                netstat_output = netstat_process.stdout.read().decode().split()
+                pid = netstat_output[-1]
                 print(f'Port {port} is in use')
-
                 # Forcefully terminate the process using the port
                 taskkill_process = subprocess.Popen(f'taskkill /F /PID {pid}', shell=True, stdout=subprocess.PIPE)
-                taskkill_output = taskkill_process.communicate()[0]
+                taskkill_output = taskkill_process.stdout.read().decode()
                 print(f'Process using port {port} terminated')
-
                 # Delete the folder
             except subprocess.CalledProcessError:
                 print(f'Port {port} is not in use')
@@ -35,8 +33,9 @@ def check_file():
                 os.system(f'rd /s /q {auto_folder_path}')
                 print(f'Folder {auto_folder_path} deleted')
             else:
-                print(f'Folder {auto_folder_path} not exist')
+                print(f'Folder {auto_folder_path} not')
          
+
 
         else:
             print(f'Folder {auto_folder_path} does not exist')
