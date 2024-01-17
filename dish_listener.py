@@ -12,6 +12,7 @@ port = 8765
 class Modify:
     last_modified = None
     current_modified = None
+    print("重启监听")
 
 def restart_program():
     python = sys.executable
