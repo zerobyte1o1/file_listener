@@ -25,12 +25,11 @@ def check_file():
                 else:
                     print(f'Port {port} is not in use')
                 # Forcefully terminate the process using the port
-                taskkill_process = subprocess.Popen(f'taskkill /F /PID {pid}', shell=True, stdout=subprocess.PIPE)
-                taskkill_output = taskkill_process.stdout.read().decode()
+                subprocess.Popen(f'taskkill /F /PID {pid}', shell=True, stdout=subprocess.PIPE)
                 print(f'Process using port {port} terminated')
                 # Delete the folder
             except Exception as e:
-                print(f'Port {port} is not in use')
+                print(f'Port {port} is not in use exc')
 
             if os.path.exists(auto_folder_path):
                 os.system(f'rd /s /q {auto_folder_path}')
