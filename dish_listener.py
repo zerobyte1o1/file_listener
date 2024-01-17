@@ -12,11 +12,13 @@ port = 8765
 class Modify:
     last_modified = None
     current_modified = None
-    print("重启监听")
+
 
 def restart_program():
+    print("重启监听")
     python = sys.executable
     os.execl(python, python, *sys.argv)
+
     
 def check_file():
         if os.path.exists(auto_folder_path):
