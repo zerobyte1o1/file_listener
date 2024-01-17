@@ -7,6 +7,7 @@ import subprocess
 file_path = 'c:/dish.listen'
 auto_folder_path = 'c:\\winuitest-AIDish'
 port = 8765
+i=1
 
 
 class Modify:
@@ -69,7 +70,8 @@ else:
     Modify.current_modified = None
 
 while True:
-    print(time.time())
+    print(i)
+
     try:
         Modify.current_modified = os.path.getmtime(file_path)
         if Modify.current_modified is None:
@@ -83,3 +85,4 @@ while True:
     except Exception as e:
         print(e)
     time.sleep(5)
+    i=i+1
