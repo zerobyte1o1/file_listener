@@ -14,13 +14,6 @@ class Modify:
 
 
 def check_file():
-    print(Modify.current_modified)
-    Modify.current_modified = os.path.getmtime(file_path)
-    if Modify.current_modified is None:
-        return
-    if Modify.current_modified > Modify.last_modified:
-        print('文件被修改')
-        Modify.last_modified = Modify.current_modified
         if os.path.exists(auto_folder_path):
             try:
                 # Get the process ID using the port
@@ -52,8 +45,6 @@ def check_file():
             print(f'Error occurred while cloning repository: {e}')
 
 
-
-
 if os.path.exists(file_path):
     Modify.last_modified = os.path.getmtime(file_path)
     Modify.current_modified = os.path.getmtime(file_path)
@@ -62,9 +53,14 @@ else:
     Modify.current_modified = None
 
 while True:
+    print(Modify.current_modified)
+    Modify.current_modified = os.path.getmtime(file_path)
+    if Modify.current_modified is None:
+        continue
+    if Modify.current_modified > Modify.last_modified:
+        print('文件被修改')
+    Modify.last_modified = Modify.current_modified
     thread = threading.Thread(target=check_file)
     thread.daemon = True
     thread.start()
     time.sleep(5)
-
-
