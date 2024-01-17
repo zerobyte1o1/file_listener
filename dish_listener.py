@@ -59,8 +59,8 @@ while True:
         continue
     if Modify.current_modified > Modify.last_modified:
         print('文件被修改')
-    Modify.last_modified = Modify.current_modified
-    thread = threading.Thread(target=check_file)
-    thread.daemon = True
-    thread.start()
+        Modify.last_modified = Modify.current_modified
+        thread = threading.Thread(target=check_file)
+        thread.daemon = True
+        thread.start()
     time.sleep(5)
