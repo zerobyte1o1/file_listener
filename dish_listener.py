@@ -19,8 +19,11 @@ def check_file():
                 # Get the process ID using the port
                 netstat_process = subprocess.Popen(f'netstat -ano | findstr :{port}', shell=True, stdout=subprocess.PIPE)
                 netstat_output = netstat_process.stdout.read().decode().split()
-                pid = netstat_output[-1]
-                print(f'Port {port} is in use')
+                if len(netstat_output) > 0:
+                    pid = netstat_output[-1]
+                    print(f'Port {port} is in use')
+                else:
+                    print(f'Port {port} is not in use')
                 # Forcefully terminate the process using the port
                 taskkill_process = subprocess.Popen(f'taskkill /F /PID {pid}', shell=True, stdout=subprocess.PIPE)
                 taskkill_output = taskkill_process.stdout.read().decode()
