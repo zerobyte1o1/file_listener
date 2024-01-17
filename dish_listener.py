@@ -53,7 +53,7 @@ else:
     Modify.current_modified = None
 
 while True:
-    print(Modify.current_modified+"/t"+time.time())
+    print(time.time())
     Modify.current_modified = os.path.getmtime(file_path)
     if Modify.current_modified is None:
         continue
