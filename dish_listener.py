@@ -22,12 +22,13 @@ def check_file():
                 if len(netstat_output) > 0:
                     pid = netstat_output[-1]
                     print(f'Port {port} is in use')
+                    # Forcefully terminate the process using the port
+                    subprocess.Popen(f'taskkill /F /PID {pid}', shell=True, stdout=subprocess.PIPE)
+                    print(f'Process using port {port} terminated')
+                    # Delete the folder
                 else:
                     print(f'Port {port} is not in use')
-                # Forcefully terminate the process using the port
-                subprocess.Popen(f'taskkill /F /PID {pid}', shell=True, stdout=subprocess.PIPE)
-                print(f'Process using port {port} terminated')
-                # Delete the folder
+
             except Exception as e:
                 print(f'Port {port} is not in use exc')
 
