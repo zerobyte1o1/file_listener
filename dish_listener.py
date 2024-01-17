@@ -15,6 +15,7 @@ class Modify:
 
 def check_file():
     print(Modify.current_modified)
+    Modify.current_modified = os.path.getmtime(file_path)
     if Modify.current_modified is None:
         return
     if Modify.current_modified > Modify.last_modified:
