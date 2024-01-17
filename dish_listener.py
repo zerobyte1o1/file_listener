@@ -15,29 +15,34 @@ class Modify:
 
 def check_file():
         if os.path.exists(auto_folder_path):
-            
-            # Get the process ID using the port
-            netstat_output = subprocess.check_output(f'netstat -ano | findstr :{port}', shell=True)
-            pid = netstat_output.decode().split()[-1]
-            print(f'Port {port} is in use')
-            # Forcefully terminate the process using the port
-            subprocess.check_output(f'taskkill /F /PID {pid}', shell=True)
-            print(f'Process using port {port} terminated')
-            # Delete the folder
-            
+            try:
+                # Get the process ID using the port
+                netstat_output = subprocess.check_output(f'netstat -ano | findstr :{port}', shell=True)
+                pid = netstat_output.decode().split()[-1]
+                print(f'Port {port} is in use')
+                # Forcefully terminate the process using the port
+                subprocess.check_output(f'taskkill /F /PID {pid}', shell=True)
+                print(f'Process using port {port} terminated')
+                # Delete the folder
+            except subprocess.CalledProcessError:
+                print(f'Port {port} is not in use')
 
-            
-            os.system(f'rd /s /q {auto_folder_path}')
-            print(f'Folder {auto_folder_path} deleted')
-            
+            try:
+                os.system(f'rd /s /q {auto_folder_path}')
+                print(f'Folder {auto_folder_path} deleted')
+            except Exception as e:
+                print(f'Error occurred while deleting folder: {e}')
+
+
         else:
             print(f'Folder {auto_folder_path} does not exist')
-       
-        print("拉取代码")
-        subprocess.Popen(
-            'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"',
-            shell=True)
-       
+        try:
+            print("拉取代码")
+            subprocess.Popen(
+                'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"',
+                shell=True)
+        except Exception as e:
+            print(f'Error occurred while cloning repository: {e}')
 
 
 if os.path.exists(file_path):
