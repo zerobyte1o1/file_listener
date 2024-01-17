@@ -1,7 +1,7 @@
 import os
+import threading
 import time
 import subprocess
-import schedule
 
 file_path = 'c:/dish.listen'
 auto_folder_path = 'c:\\winuitest-AIDish'
@@ -52,6 +52,8 @@ def check_file():
             print(f'Error occurred while cloning repository: {e}')
 
 
+
+
 if os.path.exists(file_path):
     Modify.last_modified = os.path.getmtime(file_path)
     Modify.current_modified = os.path.getmtime(file_path)
@@ -59,8 +61,10 @@ else:
     Modify.last_modified = None
     Modify.current_modified = None
 
-schedule.every(5).seconds.do(check_file)
-
 while True:
-    schedule.run_pending()
-    time.sleep(1)
+    thread = threading.Thread(target=check_file)
+    thread.daemon = True
+    thread.start()
+    time.sleep(5)
+
+
