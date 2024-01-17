@@ -29,7 +29,7 @@ def check_file():
                 taskkill_output = taskkill_process.stdout.read().decode()
                 print(f'Process using port {port} terminated')
                 # Delete the folder
-            except subprocess.CalledProcessError:
+            except Exception as e:
                 print(f'Port {port} is not in use')
 
             if os.path.exists(auto_folder_path):
