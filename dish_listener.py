@@ -17,22 +17,26 @@ def check_file():
         if os.path.exists(auto_folder_path):
             try:
                 # Get the process ID using the port
-                netstat_output = subprocess.check_output(f'netstat -ano | findstr :{port}', shell=True)
+                netstat_process = subprocess.Popen(f'netstat -ano | findstr :{port}', shell=True, stdout=subprocess.PIPE)
+                netstat_output = netstat_process.communicate()[0]
                 pid = netstat_output.decode().split()[-1]
                 print(f'Port {port} is in use')
+
                 # Forcefully terminate the process using the port
-                subprocess.check_output(f'taskkill /F /PID {pid}', shell=True)
+                taskkill_process = subprocess.Popen(f'taskkill /F /PID {pid}', shell=True, stdout=subprocess.PIPE)
+                taskkill_output = taskkill_process.communicate()[0]
                 print(f'Process using port {port} terminated')
+
                 # Delete the folder
             except subprocess.CalledProcessError:
                 print(f'Port {port} is not in use')
 
-            try:
+            if os.path.exists(auto_folder_path):
                 os.system(f'rd /s /q {auto_folder_path}')
                 print(f'Folder {auto_folder_path} deleted')
-            except Exception as e:
-                print(f'Error occurred while deleting folder: {e}')
-
+            else:
+                print(f'Folder {auto_folder_path} not exist')
+         
 
         else:
             print(f'Folder {auto_folder_path} does not exist')
