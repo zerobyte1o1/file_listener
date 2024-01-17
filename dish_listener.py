@@ -7,7 +7,7 @@ import subprocess
 file_path = 'c:/dish.listen'
 auto_folder_path = 'c:\\winuitest-AIDish'
 port = 8765
-i=1
+i = 1
 
 
 class Modify:
@@ -20,46 +20,46 @@ def restart_program():
     python = sys.executable
     os.execl(python, python, *sys.argv)
 
-    
+
 def check_file():
-        if os.path.exists(auto_folder_path):
-            try:
-                # Get the process ID using the port
-                netstat_process = subprocess.Popen(f'netstat -ano | findstr :{port}', shell=True, stdout=subprocess.PIPE)
-                netstat_output = netstat_process.stdout.read().decode().split()
-                if len(netstat_output) > 0:
-                    pid = netstat_output[-1]
-                    print(f'Port {port} is in use')
-                    # Forcefully terminate the process using the port
-                    subprocess.Popen(f'taskkill /F /PID {pid}', shell=True, stdout=subprocess.PIPE)
-                    print(f'Process using port {port} terminated')
-                    # Delete the folder
-                else:
-                    print(f'Port {port} is not in use')
-
-            except Exception as e:
-                print(f'Port {port} is not in use exc')
-
-            if os.path.exists(auto_folder_path):
-                os.system(f'rd /s /q {auto_folder_path}')
-                print(f'Folder {auto_folder_path} deleted')
-            else:
-                print(f'Folder {auto_folder_path} not')
-         
-
-
-        else:
-            print(f'Folder {auto_folder_path} does not exist')
+    if os.path.exists(auto_folder_path):
         try:
-            print("拉取代码")
-            subprocess.Popen(
-                'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"',
-                shell=True)
-            # command = 'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"'
-            # subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).detach()
-            restart_program()
+            # Get the process ID using the port
+            netstat_process = subprocess.Popen(f'netstat -ano | findstr :{port}', shell=True, stdout=subprocess.PIPE)
+            netstat_output = netstat_process.stdout.read().decode().split()
+            if len(netstat_output) > 0:
+                pid = netstat_output[-1]
+                print(f'Port {port} is in use')
+                # Forcefully terminate the process using the port
+                subprocess.Popen(f'taskkill /F /PID {pid}', shell=True, stdout=subprocess.PIPE)
+                print(f'Process using port {port} terminated')
+                # Delete the folder
+            else:
+                print(f'Port {port} is not in use')
+
         except Exception as e:
-            print(f'Error occurred while cloning repository: {e}')
+            print(f'Port {port} is not in use exc')
+
+        if os.path.exists(auto_folder_path):
+            os.system(f'rd /s /q {auto_folder_path}')
+            print(f'Folder {auto_folder_path} deleted')
+        else:
+            print(f'Folder {auto_folder_path} not')
+
+
+
+    else:
+        print(f'Folder {auto_folder_path} does not exist')
+    try:
+        print("拉取代码")
+        subprocess.Popen(
+            'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"',
+            shell=True)
+        # command = 'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"'
+        # subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).detach()
+        restart_program()
+    except Exception as e:
+        print(f'Error occurred while cloning repository: {e}')
 
 
 if os.path.exists(file_path):
@@ -84,5 +84,7 @@ while True:
             thread.start()
     except Exception as e:
         print(e)
+    if i == 100:
+        restart_program()
     time.sleep(5)
-    i=i+1
+    i = i + 1
