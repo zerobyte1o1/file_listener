@@ -14,12 +14,6 @@ class Modify:
 
 
 def check_file():
-    if os.path.exists(file_path):
-        Modify.last_modified = os.path.getmtime(file_path)
-        Modify.current_modified = os.path.getmtime(file_path)
-    else:
-        Modify.last_modified = None
-        Modify.current_modified = None
     print(Modify.current_modified)
     if Modify.current_modified is None:
         return
@@ -56,6 +50,13 @@ def check_file():
         except Exception as e:
             print(f'Error occurred while cloning repository: {e}')
 
+
+if os.path.exists(file_path):
+    Modify.last_modified = os.path.getmtime(file_path)
+    Modify.current_modified = os.path.getmtime(file_path)
+else:
+    Modify.last_modified = None
+    Modify.current_modified = None
 
 schedule.every(5).seconds.do(check_file)
 
