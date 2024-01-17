@@ -16,14 +16,11 @@ class Modify:
 def check_file():
     if os.path.exists(file_path):
         Modify.last_modified = os.path.getmtime(file_path)
-    else:
-        Modify.last_modified = None
-
-    if os.path.exists(file_path):
         Modify.current_modified = os.path.getmtime(file_path)
     else:
+        Modify.last_modified = None
         Modify.current_modified = None
-    print(time.time())
+    print(Modify.current_modified)
     if Modify.current_modified is None:
         return
     if Modify.current_modified > Modify.last_modified:
