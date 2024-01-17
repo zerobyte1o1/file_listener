@@ -44,9 +44,11 @@ def check_file():
             print(f'Folder {auto_folder_path} does not exist')
         try:
             print("拉取代码")
-            subprocess.Popen(
-                'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"',
-                shell=True)
+            # subprocess.Popen(
+            #     'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"',
+            #     shell=True)
+            command = 'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"'
+            subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).detach()
         except Exception as e:
             print(f'Error occurred while cloning repository: {e}')
 
