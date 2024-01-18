@@ -93,8 +93,8 @@ while True:
     except Exception as e:
         print(e)
         continue
-    if i >= 2:
-        restart_program()
+    # if i >= 2:
+    #     restart_program()
     time.sleep(5)
     i = i + 1
 
