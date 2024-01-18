@@ -56,7 +56,7 @@ def check_file():
         #     shell=True)
         # command = 'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"'
         # subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).detach()
-        command = 'cmd /c "cd /d C:\\ && git clone https://... && cd winuitest-AIDish && run.bat"'
+        command = 'cmd /c "cd /d C:\\ && git clone https://liufj:lfj19980123@git.shifang.co/test/winuitest-AIDish.git && cd winuitest-AIDish && run.bat"'
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         # 等待命令执行完成并获取输出
