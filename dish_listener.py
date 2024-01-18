@@ -84,7 +84,7 @@ while True:
             thread.start()
     except Exception as e:
         print(e)
-    if i == 100:
+    if i == 30:
         restart_program()
     time.sleep(5)
     i = i + 1
